@@ -1,0 +1,21 @@
+<%-include("partials/header.ejs")%>
+<div class="main-invite-container">
+    <h1>Scheduled-Events</h1>
+    <div class="invite-container">
+        <%events.forEach(function(events){%>
+        <%if(events.accept){%>
+        <h4 class="title" style="color:<%=events.color%>;font-family:<%=events.font%>"><%=events.title%></h4>
+        <p class="from" style="color:<%=events.color%>;font-family:<%=events.font%>"><strong><%=events.from%></strong></p>
+        <br>
+        <p class="event-content" style="color:<%=events.color%>;font-family:<%=events.font%>"><em><%-events.body%></em></p>
+        <p class="schedule-content" style="color:<%=events.color%>;font-family:<%=events.font%>"><%=events.time%></p>
+        <hr>
+        <%}%>
+        <%})%>
+    </div>
+   
+</div>
+
+
+
+<%-include("partials/footer.ejs")%>

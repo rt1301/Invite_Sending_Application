@@ -1,0 +1,40 @@
+<%-include("partials/header.ejs")%>
+<div class="main-invite-container">
+    <h1>Your Notifications</h1>
+    <hr>
+    <div class="invite-container">
+        <h2>Arrived Invites</h2>
+        <%events.forEach(function(event){%>
+            <%if(id == event.to){%>
+                <br>
+                <p><strong><em><%=event.from%></em></strong> has send you an invite(Title: <strong><%=event.title%>)</strong></p>
+                <hr>
+           <%}%>
+         <%});%>
+    </div>
+    <hr>
+    <div class="invite-container">
+        <h2>Invites Accepted</h2>
+        <%events.forEach(function(event){%>
+            <%if(event.from === id){%>
+                <%if(event.accept){%>
+                    <br>
+                    <p><strong><em><%=event.to%></em></strong> has accepted your invitation(Title: <strong><%=event.title%>)</strong></p>
+                    <div class="row">
+                        <div class="col-25">No. of Guests Coming:</div>
+                        <div class="col-75 people" ><%=event.people%></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-25">Food Preference:</div>
+                        <div class="col-75"><%=event.food%></div>
+                    </div>
+                    <hr>
+                <%}%>
+            <%}%>
+        <%});%>
+    </div>
+        
+</div>
+
+<%-include("partials/footer.ejs")%>

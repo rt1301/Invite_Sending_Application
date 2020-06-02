@@ -1,0 +1,51 @@
+<%-include("partials/header.ejs")%>
+
+<div class="main-invite-container">
+<h1 class="header">Invites List</h1>
+
+   <%event.forEach(function(events){%>
+    <%if(id === events.to){%>
+    <div class="invite-container" id="<%=events._id%>">
+      <h4 class="title" style="color:<%=events.color%>;font-family:<%=events.font%>"><%=events.title%></h4>
+      <p class="from" style="color:<%=events.color%>;font-family:<%=events.font%>"><strong><%=events.from%></strong></p>
+      <br>
+      <p class="event-content" style="color:<%=events.color%>;font-family:<%=events.font%>"><em><%-events.body%></em></p>
+      <p class="schedule-content" style="color:<%=events.color%>;font-family:<%=events.font%>"><%=events.time%></p>
+      <%if(events.dtime){%>
+        <p class="schedule-content dtime" style="color:<%=events.color%>;font-family:<%=events.font%>"><em><strong>Deadline to accept the invite:</strong></em> <%=events.dtime%></p>
+      <%}%>
+      <%if(events.accept){%>
+        <br>
+        <div class="accepted"><span><a href="/invites/<%=id%>/events">Accepted</a> <i class="far fa-smile-beam"></i></span></div>
+      <%}else{%>
+        <br>
+        <div class="btns">
+          <form action="/invites/<%=id%>/events" method="POST">
+              <div class="row">
+                  <div class="col-25">
+                      <label>No. of people</label>
+                  </div>
+                  <div class="col-75">
+                      <input type="number" name="people" id="people" value="1" min="1">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-25">
+                      <label>Food Preferences:</label>
+                  </div>
+                  <div class="col-75">
+                      <input type="text" name="food" id="food" value="Unspecified">
+                  </div>
+              </div>
+            <button type="submit" name="<%=events._id%>" value="Accept" class=" accept ">Accept <i class="far fa-check-circle"></i></button>
+            <button type="submit" name="<%=events._id%>" value="Reject" class="reject" >Reject <i class="far fa-times-circle"></i></button>
+          </form>
+         </div>
+      <%}%>
+    </div>
+    <hr>
+    <%}%>
+   <%})%>
+</div>
+
+<%-include("partials/footer.ejs")%>

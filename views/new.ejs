@@ -1,0 +1,92 @@
+<%-include("partials/header.ejs")%>
+<div class="invite-container">
+    <form action="/invites/<%=id%>" method="POST" id="new-invite">
+      <div class="row">
+        <div class="col-25">
+          <label for="recipient">To</label>
+        </div>
+        <div class="col-75">
+          <select id="recipient" name="user[to]">
+            <%userArray.forEach(function(user){%>
+                <%if(user.username!==currentUser.username){%>
+                    <option value="<%=user.username%>"><%=user.username%></option>
+                <%}%>
+            <%})%>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="title">Title</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="user[title]" placeholder="Title" id="new-form-title">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="from">Sender's Name</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="user[from]" placeholder="From" id="new-form-from" value="<%=id%>" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label>Template</label>
+        </div>
+        <div class="col-75">
+          <select id="tmplt" name="template">
+            <option value="Bday">BirthDay Celebration</option>
+            <option value="Wedding">Wedding Invite</option>
+            <option value="celeb">Random Celebration</option>
+            <option value="default">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="content">Body</label>
+        </div>
+        <div class="col-75">
+          <textarea id="content" name="user[body]" placeholder="Write something.." style="height:200px" required>
+          </textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label>Font-Styles:</label>
+        </div>
+        <div class="col-75">
+          <input type="color" id="color" name="user[color]">
+          <select id="font" name="user[font]">
+            <option value="Montserrat">Montserrat</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Nunito">Nunito</option>
+            <option value="PT Serif">PT Serif</option>
+            <option value="Playfair Display">Default</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-25">
+              <label for="time">Event Schedule</label>
+          </div>
+          <div class="col-75">
+            <input type="datetime-local" id="event-time" name="user[time]">
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-25">
+              <label for="time">Deadline for Acceptation</label>
+          </div>
+          <div class="col-75">
+            <input type="datetime-local" id="event-time" name="user[dtime]">
+          </div>
+      </div>
+      <div class="row">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+<%-include("partials/footer.ejs")%>

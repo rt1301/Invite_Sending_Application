@@ -1,0 +1,40 @@
+<%-include("partials/header.ejs")%>
+<div class="main-invite-container">
+    <h1>DashBoard</h1>
+    <div class="invite-container dashboard">
+        <div class="row" id="ar-inv">
+            <a href="/invites/<%=id%>">Arrived Invites:</a>
+        </div>
+    </div>
+    <hr>
+    <div class="invite-container dashboard" id="ac-inv">
+        <div class="row">
+            <a href="/invites/<%=id%>/events">Accepted Invites:</a>
+        </div>
+    </div>
+    <hr>
+    <div class="invite-container dashboard" id="notify">
+        <div class="row">
+            <a href="/invites/<%=id%>/notification">Notifications:</a> 
+        </div>
+    </div>
+    <hr>
+</div>
+
+<script>
+    var arrinv = document.getElementById("ar-inv");
+    var accinv = document.getElementById("ac-inv");
+    var notify = document.getElementById("notify");
+    accinv.addEventListener("click",function(){
+    window.location.href = ("/invites/<%=id%>/events");
+});
+arrinv.addEventListener("click",function(){
+    window.location.href = ("/invites/<%=id%>");
+});
+notify.addEventListener("click",function(){
+    window.location.href = ("/invites/<%=id%>/notification");
+});
+console.log(accinv,arrinv,notify);
+</script>
+
+<%-include("partials/footer.ejs")%>

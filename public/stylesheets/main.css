@@ -1,0 +1,190 @@
+body
+{
+  font-family: 'Playfair Display', serif;
+}
+.auth-container 
+{
+    padding: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 800px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.header
+{
+    border: none;
+    margin: auto 40%;
+    padding: 0;
+    width: auto;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2857em;
+    text-transform: none;
+    color: rgba(0,0,0,.87);
+    font-size: 2em;
+}
+.main-invite-container
+{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.14285714rem;
+    margin-top: 3.0em;
+    
+}
+.accepted
+{
+  text-align: center;
+  margin-bottom: 5px;
+}
+br
+{
+  margin:0;
+}
+span
+{
+text-align: center;
+border: 1px solid #007bff;
+color: #007bff;
+font-size: 1.5rem;
+border-radius: 0.25rem;
+padding: 4px;
+}
+.invite-container
+{
+    margin-top: 1rem;
+    margin-bottom: 0;
+    margin-left: 25%;
+    text-align: center;
+    border-radius: .28571429rem;
+    max-width: 700px!important;
+    box-shadow: none;
+    border: 1px solid  #17a2b8;
+    position: relative;
+    background: #fff;
+}
+  /* Full-width input fields */
+input[type=text], input[type=password] 
+{
+    font-family: 'Playfair Display', serif;
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+  
+input[type=text]:focus, input[type=password]:focus 
+{
+    font-family: 'Playfair Display', serif;
+    background-color: #ddd;
+    outline: none;
+}
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #f1f1f1;
+    max-width: 700px!important;
+    align-self: center;
+    margin-left: auto;
+    margin-right: 29%;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    width: 100%;
+  }
+  /* Set a style for the submit/register button */
+  .registerbtn 
+  {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: x-large;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    margin-bottom: 0;
+  }
+  
+  .registerbtn:hover 
+  {
+    opacity:1;
+  }
+
+  a 
+  {
+    color: dodgerblue;
+    text-decoration: none;
+  }
+  
+  /* Set a grey background color and center the text of the "sign in" section */
+  .signup 
+  {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    height: 40px;
+  }
+.accept
+{
+  background-color: white;
+  outline: none;
+  text-align: center;
+  border: 1px solid #28a745;
+  color: #28a745;
+  font-size: 1.5rem;
+  border-radius: 0.25rem;
+  padding: 2px;
+}
+.reject
+{
+  background-color: white;
+  outline: none;
+  text-align: center;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  font-size: 1.5rem;
+  border-radius: 0.25rem;
+  padding: 2px;
+  margin-left: 13px;
+}
+.event-content
+{
+  font-weight: 500;
+}
+.btns
+{
+  margin-bottom: 5px;
+}
+.from,.title
+{
+  font-size: larger;
+}
+
+.dashboard
+{
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.dtime
+{
+  font-size: medium;
+}
+.people
+{
+  font-size: x-large;
+}
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
