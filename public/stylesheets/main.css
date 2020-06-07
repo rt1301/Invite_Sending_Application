@@ -181,6 +181,31 @@ input[type=text]:focus, input[type=password]:focus
 {
   font-size: x-large;
 }
+.alert
+{
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.flash-container
+{
+  margin: auto 5%;
+  text-align: center;
+}
+.alert-danger
+{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert-success
+{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
 @media screen and (max-width: 600px) {
   .col-25, .col-75, input[type=submit] {
     width: 100%;

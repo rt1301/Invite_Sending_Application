@@ -3,7 +3,8 @@ seedDB();
 var express 				= require('express'),
     app 					= express(),
     expressSanitizer        = require('express-sanitizer');
-	body 				    = require('body-parser'),
+    body 				    = require('body-parser'),
+    flash		            = require("connect-flash"),
 	mongoose 				= require("mongoose"),
 	passport				= require('passport'),
 	LocalStrategy			= require('passport-local'),
@@ -19,6 +20,7 @@ var accept,id;
     mongoose.set('useNewUrlParser', true);
     mongoose.set('useUnifiedTopology', true);
     mongoose.connect("mongodb://localhost/delta-task3-hm",{ useNewUrlParser: true, useUnifiedTopology: true, });
+    app.use(flash());
     // PASSPORT CONFIG
     app.use(require('express-session')({
         secret: "This is a secret message",
@@ -27,19 +29,16 @@ var accept,id;
     }));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(function(req, res, next)
+    {
+        res.locals.error = req.flash("error");
+        res.locals.success = req.flash("success");
+        res.locals.currentUser = req.user;
+        next();
+     });
     passport.use(new LocalStrategy(User.authenticate()));
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
-    app.use(function(req, res, next)
-    {
-        res.locals.currentUser = req.user;
-        next();
-    });
-    app.use(function(req, res, next)
-    {
-        res.locals.currentUser = req.user;
-        next();
-    });
     app.use(express.static(__dirname + "/public"));
     app.use(body.urlencoded({extended : true}));
     app.set("view engine","ejs");
@@ -125,6 +124,7 @@ app.post("/invites/:id",function(req, res)
                     }
                     else
                     {
+                        req.flash("success","Invite Created");
                         res.redirect("/invites/"+username);
                     }
                 });
@@ -219,6 +219,7 @@ app.post("/invites/:id/events",isLoggedIn,function(req,res){
                             {
                                 if(updatedEvent.accept)
                                 {
+                                    req.flash("success","Invite accepted");
                                     res.redirect("/invites/"+username+"/events");
                                 }
                                 else
@@ -229,6 +230,7 @@ app.post("/invites/:id/events",isLoggedIn,function(req,res){
                                             console.log(err);
                                         }
                                     });
+                                    req.flash("Invite Deleted");
                                     res.redirect("/invites/"+username);
                                 }
                             }
@@ -269,6 +271,7 @@ app.post("/invites/:id/events",isLoggedIn,function(req,res){
                             {
                                 if(updatedEvent.accept)
                                 {
+                                    req.flash("success","Invite Accepted");
                                     res.redirect("/invites/"+username+"/events");
                                 }
                                 else
@@ -307,11 +310,12 @@ app.post("/register",function(req,res)
     {
 		if(err)
 			{
-				console.log(err);
+				req.flash("error",err.message);
 				return res.render("register",{currentUser:req.user,id:username});
 			}
          passport.authenticate("local")(req, res, function()
         {
+           req.flash("success","Registration completed");
            res.redirect("/login");
         });
 	});
@@ -328,13 +332,15 @@ failureRedirect: "/login",
 }),function(req, res)
 {
     username = req.body.username;
+    req.flash("success","You are logged in as " + username);
     res.redirect("/invites/"+req.body.username+"/dashboard");
     console.log(req.body.username);
 });
 // LOGOUT 
 app.get("/logout",function(req, res)
 {
-	req.logout();
+    req.logout();
+    req.flash("success","You are successfully logged out");
 	res.redirect("/login");
 });
 // Logged in middleware
@@ -343,8 +349,8 @@ function isLoggedIn(req, res, next)
 	if(req.isAuthenticated())
 		{
 			return next();
-		}
-		res.redirect("/login");	
+        }
+	res.redirect("/login");	
 		
 }
 
