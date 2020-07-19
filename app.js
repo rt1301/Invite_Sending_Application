@@ -2,7 +2,7 @@ var seedDB                  = require("./seeds.js");
 seedDB();
 var express 				= require('express'),
     app 					= express(),
-    expressSanitizer        = require('express-sanitizer');
+    expressSanitizer        = require('express-sanitizer'),
     body 				    = require('body-parser'),
     flash		            = require("connect-flash"),
 	mongoose 				= require("mongoose"),
