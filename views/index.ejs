@@ -4,7 +4,7 @@
 <h1 class="header">Invites List</h1>
 
    <%event.forEach(function(events){%>
-    <%if(id === events.to){%>
+    <%if((id === events.to || events.to === 'Everyone') && id!== events.from){%>
     <div class="invite-container" id="<%=events._id%>">
       <h4 class="title" style="color:<%=events.color%>;font-family:<%=events.font%>"><%=events.title%></h4>
       <p class="from" style="color:<%=events.color%>;font-family:<%=events.font%>"><strong><%=events.from%></strong></p>

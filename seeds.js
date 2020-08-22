@@ -13,20 +13,13 @@ var data = [
 ];
 function seedDB()
 {
-    // Remove all invites
-    Event.deleteMany({to:"Everyone"},function(err){
-        if(err)
-        {
-            console.log(err);
-        }
-        // Add the demo invite
-        data.forEach(function(seed){
-            Event.create(seed,function(err,event){
-                if(err)
-                {
-                    console.log(err);
-                }
-            });
+     // Add the demo invite
+     data.forEach(function(seed){
+        Event.create(seed,function(err,event){
+            if(err)
+            {
+                console.log(err);
+            }
         });
     });
 }

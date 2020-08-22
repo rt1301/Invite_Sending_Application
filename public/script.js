@@ -16,6 +16,10 @@ color.value = defaultColor;
 color.addEventListener("input", updateFirst, false);
 font.addEventListener("input",updateFont,false);
 template.addEventListener("input",updateEvent,false);
+body.style.fontFamily = font.value;
+title.style.fontFamily = font.value;
+from.style.fontFamily = font.value;
+body.innerText = "<p>Hey <em>nameOfReciever</em></p><p>As you know I have my <em>Bday</em> on <strong>Date</strong>, <p>So I am throwing a party for the same and wanted you to come for the same. The time for the party is mentioned below.</p>";
 function updateFirst(event)
 {
     body.style.color = event.target.value;

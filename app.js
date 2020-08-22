@@ -1,5 +1,5 @@
 var seedDB                  = require("./seeds.js");
-seedDB();
+// seedDB();
 var express 				= require('express'),
     app 					= express(),
     expressSanitizer        = require('express-sanitizer'),
@@ -105,32 +105,63 @@ app.post("/invites/:id",function(req, res)
 {
     req.body.user.body = req.sanitize(req.body.user.body);
     req.params.id = username;
+    var invites = [];
     Event.create(req.body.user,function(err,newInvite)
     {
-        User.findOne({username:req.body.user.to},function(err,foundUser)
+        if(req.body.user.to === 'Everyone')
         {
-            if(err)
+           User.find({username:{$ne:req.body.user.from}},function(err,foundUsers)
+           {
+               if(err)
+               {
+                   console.log(err);
+               }
+               else
+               {
+                   for(var i=0;i<foundUsers.length;i++)
+                   {
+                       invites[i] = newInvite;
+                       invites[i].to = foundUsers[i].username;
+                       foundUsers[i].events.push(invites[i]);
+                       foundUsers[i].save((err,data)=>{
+                        if(err)
+                        {
+                            console.log(err);
+                        }
+                       });
+                   }
+               }
+                req.flash("success","Invite Created");
+                res.redirect("/invites/"+username);
+           })
+        }
+        else
+        {
+            User.findOne({username:req.body.user.to},function(err,foundUser)
             {
-                console.log(err);
-            }
-            else
-            {
-                foundUser.events.push(newInvite);
-                foundUser.save(function(err,data)
+                if(err)
                 {
-                    if(err)
+                    console.log(err);
+                }
+                else
+                {
+                    foundUser.events.push(newInvite);
+                    foundUser.save(function(err,data)
                     {
-                        console.log(err);
-                    }
-                    else
-                    {
-                        req.flash("success","Invite Created");
-                        res.redirect("/invites/"+username);
-                    }
-                });
-            }
-        });
-    });
+                        if(err)
+                        {
+                            console.log(err);
+                        }
+                        else
+                        {
+                            req.flash("success","Invite Created");
+                            res.redirect("/invites/"+username);
+                        }
+                    });
+                }
+            });
+        }
+    })
 });
 // Accept and Reject options
 app.get("/invites/:id/events",isLoggedIn,function(req, res){
@@ -182,10 +213,11 @@ app.post("/invites/:id/events",isLoggedIn,function(req,res){
     var arr = Object.entries(req.body);
     id = arr[2][0];
     accept = arr[2][1];
+    console.log(accept);
     var food = req.body.food;
     var people = req.body.people;
     console.log("POST Request is sent");
-    if(accept!=='reject')
+    if(accept!=='Reject')
     {
         Event.findById(id,function(err,events){
             if(err)

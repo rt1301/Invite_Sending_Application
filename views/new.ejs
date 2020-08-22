@@ -12,6 +12,7 @@
                     <option value="<%=user.username%>"><%=user.username%></option>
                 <%}%>
             <%})%>
+            <option value="Everyone">Everyone</option>
           </select>
         </div>
       </div>
@@ -81,7 +82,7 @@
               <label for="time">Deadline for Acceptation</label>
           </div>
           <div class="col-75">
-            <input type="datetime-local" id="event-time" name="user[dtime]">
+            <input type="datetime-local" id="deadline-time" name="user[dtime]">
           </div>
       </div>
       <div class="row">
@@ -89,4 +90,16 @@
       </div>
     </form>
   </div>
+  <script>
+    var elem = document.getElementById("event-time");
+    var dtime = document.getElementById("deadline-time");
+    var iso = new Date().toISOString();
+    var date = new Date();
+    var minDate = iso.substring(0,16);
+    var min_ddate = date.setDate(Number(minDate.substring(8,10)) + 1);
+    elem.value = minDate;
+    elem.min = minDate;
+    dtime.value = date.toISOString().substring(0,16);
+    dtime.min   = date.toISOString().substring(0,16);
+  </script>
 <%-include("partials/footer.ejs")%>
