@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.17.1",
-    "mongodb": "^2.2.33",
+    "mongodb": "^3.1.13",
     "mongoose": "^5.9.16",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
